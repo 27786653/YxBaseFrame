@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="beetlConfig" class="org.beetl.ext.spring.BeetlGroupUtilConfiguration" init-method="init">
+		<property name="configFileResource" value="classpath:beetl/beetl.properties" />
+		<!-- 貌似没起效果 需要在beetl配置文件中配置 -->
+		<!-- <property name="functionPackages">
+			<map>
+				<entry key="i18nUtil" value-ref="i18nUtil" />
+			</map>
+		</property> -->
+	</bean>
+
+	<bean id="viewResolver" class="org.beetl.ext.spring.BeetlSpringViewResolver">
+		<property name="order" value="3" />
+		<property name="suffix" value=".html" />
+		<property name="contentType" value="text/html;charset=UTF-8" />
+	</bean>
+	
+	<bean id="beanNameViewResolver" 
+	 	class="org.springframework.web.servlet.view.BeanNameViewResolver">
+	 	<property name="order" value="0" />
+    </bean>
+    
+</beans>
